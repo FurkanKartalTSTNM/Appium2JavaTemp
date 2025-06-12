@@ -80,9 +80,6 @@ public abstract class BaseTest {
             if (driver != null) {
                 driver.quit();
             }
-            if (driver != null) {
-                driver.quit();
-            }
         } catch (Exception e) {
             logger.error("Teardown Error: " + e.getMessage());
         }
