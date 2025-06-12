@@ -7,7 +7,7 @@ import org.openqa.selenium.WebElement;
 public class AndroidTest extends BaseTest {
 
     @Test
-    public void settingsTestAndroid() throws InterruptedException {
+    public void basicAndroidTest() throws InterruptedException {
         WebElement generalButton = androidDriver.findElement(AppiumBy.xpath("(//android.widget.ImageView[@resource-id=\"com.gratis.android:id/navigation_bar_item_icon_view\"])[1]"));
         generalButton.click();
         logger.info("Clicked to HomePage");
