@@ -27,12 +27,10 @@ import static com.testinium.util.Constants.PLATFORM_NAME;
 public abstract class BaseTest {
 
     protected static Logger logger = LoggerFactory.getLogger(BaseTest.class);
-    protected static AndroidDriver androidDriver;
-    protected static IOSDriver iosDriver;
+    protected static AppiumDriver driver;
     protected static URL hubUrl;
     protected static FluentWait<AppiumDriver> appiumFluentWait;
     static Boolean DeviceAndroid = false;
-
 
     @BeforeAll
     public static void setup() {
@@ -48,12 +46,10 @@ public abstract class BaseTest {
                 overridden.setCapability(APPIUM_APP_ACTIVITY, "YOUR_APP_ACTIVITY");
                 overridden.setCapability(APPIUM_AUTO_GRANT_PERMISSIONS, true);
                 overridden.setCapability(APPIUM_NEW_COMMAND_TIMEOUT, 60000);
-                androidDriver = new TestiniumAndroidDriver(hubUrl, overridden);
+                driver = new TestiniumAndroidDriver(hubUrl, overridden);
 
-                androidDriver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-                appiumFluentWait = new FluentWait<AppiumDriver>(androidDriver);
-
-
+                driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+                appiumFluentWait = new FluentWait<AppiumDriver>(driver);
 
             } else {
                 DesiredCapabilities overridden = new DesiredCapabilities();
@@ -62,10 +58,10 @@ public abstract class BaseTest {
                 overridden.setCapability(APPIUM_AUTOMATION_NAME, "YOUR_AUTOMATION_NAME");
                 overridden.setCapability(APPIUM_BUNDLE_ID, "YOUR_BUNDLE_ID");
                 overridden.setCapability(APPIUM_AUTO_ACCEPT_ALERTS, true);
-                iosDriver = new TestiniumIOSDriver(hubUrl, overridden);
+                driver = new TestiniumIOSDriver(hubUrl, overridden);
 
-                iosDriver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-                appiumFluentWait = new FluentWait<AppiumDriver>(iosDriver);
+                driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+                appiumFluentWait = new FluentWait<AppiumDriver>(driver);
             }
             appiumFluentWait.withTimeout(Duration.ofSeconds(8))
                     .pollingEvery(Duration.ofMillis(350))
@@ -81,11 +77,11 @@ public abstract class BaseTest {
     @AfterAll
     public static void teardown() {
         try {
-            if (androidDriver != null) {
-                androidDriver.quit();
+            if (driver != null) {
+                driver.quit();
             }
-            if (iosDriver != null) {
-                iosDriver.quit();
+            if (driver != null) {
+                driver.quit();
             }
         } catch (Exception e) {
             logger.error("Teardown Error: " + e.getMessage());

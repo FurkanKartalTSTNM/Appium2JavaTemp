@@ -16,18 +16,18 @@ public class IOSTest extends BaseTest {
     @Test
     public void basicIosTest() throws InterruptedException {
         System.out.println("StartIos test");
-        fingerSwipe(iosDriver, 100, 800, 100, 600, 1000);
+        fingerSwipe(driver, 100, 800, 100, 600, 1000);
         Thread.sleep(2000);
 
-        WebElement dashboardButton = iosDriver.findElement(AppiumBy.xpath("//XCUIElementTypeStaticText[@name=\"81 ilde mağazadan ÜCRETSİZ TESLİMAT fırsatları\"]"));
+        WebElement dashboardButton = driver.findElement(AppiumBy.xpath("//XCUIElementTypeStaticText[@name=\"81 ilde mağazadan ÜCRETSİZ TESLİMAT fırsatları\"]"));
         dashboardButton.click();
 
-        WebElement markalar = iosDriver.findElement(AppiumBy.xpath("//XCUIElementTypeButton[contains(@name, \"Markalar\")]"));
+        WebElement markalar = driver.findElement(AppiumBy.xpath("//XCUIElementTypeButton[contains(@name, \"Markalar\")]"));
         markalar.click();
 
-        fingerSwipe(iosDriver, 100, 800, 100, 400, 1000);
+        fingerSwipe(driver, 100, 800, 100, 400, 1000);
 
-        WebElement kampanyalar = iosDriver.findElement(AppiumBy.xpath("//XCUIElementTypeButton[contains(@name, \"Kampanyalar\")]"));
+        WebElement kampanyalar = driver.findElement(AppiumBy.xpath("//XCUIElementTypeButton[contains(@name, \"Kampanyalar\")]"));
         kampanyalar.click();
     }
 
